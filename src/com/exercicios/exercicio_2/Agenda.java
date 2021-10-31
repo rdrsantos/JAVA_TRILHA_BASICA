@@ -1,4 +1,4 @@
-package exercicio2;
+package com.exercicios.exercicio_2;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,27 @@ public class Agenda {
         } else {
             System.out.println("Limite de 10 pessoas foi atingido");
         }
+    }
+
+    public void buscarPessoa(String nome){
+        for(int i = 0; i <= pessoas.size() -1; i++){
+            if(nome == pessoas.get(i).getNome()){
+                System.out.println(pessoas.get(i).getNome() + " = " + i);
+                return;
+            }
+        }
+        System.out.println(nome + " não existe na agenda!");
+    }
+
+    public void excluirPessoa(String nome){
+        for (int i = 0; i <= pessoas.size() - 1; i++){
+            if(nome == pessoas.get(i).getNome()){
+                System.out.println(pessoas.get(i).getNome() + " foi excluido");
+                pessoas.remove(i);
+                return;
+            }
+        }
+        System.out.println("'"+nome+"' " + "não existe na agenda!");
     }
 
     public void imprimeAgenda(){

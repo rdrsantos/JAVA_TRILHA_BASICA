@@ -1,4 +1,4 @@
-package com.exercicio1;
+package com.exercicios.exercicio_1;
 
 import java.util.Calendar;
 
