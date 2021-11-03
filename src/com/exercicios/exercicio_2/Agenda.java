@@ -26,13 +26,20 @@ public class Agenda {
         System.out.println("'"+nome+"' " + "não existe na agenda!");
     }
 
-    public int buscarPessoa(String nome){
+    public void buscarPessoa(String nome){
+        ArrayList<Integer> resultados = new ArrayList<Integer>();
         for(int i = 0; i <= pessoas.size() - 1; i++){
             if(nome == pessoas.get(i).getNome()){
-                return i + 1;
+                resultados.add(i);
             }
         }
-        return -1;
+        if(resultados.size() > 0){
+            for (int resultado : resultados){
+                System.out.println(nome + " encontrado(a) na posição " + (resultado + 1) + " da agenda");
+            }
+        } else {
+            System.out.println(nome + " não foi encontrado(a) na agenda");
+        }
     }
 
     public void imprimeAgenda(){
