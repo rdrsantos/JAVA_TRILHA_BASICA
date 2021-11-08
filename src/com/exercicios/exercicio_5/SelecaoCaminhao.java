@@ -9,13 +9,17 @@ public class SelecaoCaminhao extends Controle{
         boolean continuar = true;
         while (continuar){
             String tipo = leString("Digite o tipo do caminhão:");
-           if (!tipo.equalsIgnoreCase("fim")) {
-                int quantidadePluviometros = leInteiro("Digite o numero de pluviometros transportados:");
-                adicionarCaminhao(tipo, quantidadePluviometros);
+            if(tipo.equalsIgnoreCase("beta") || tipo.equalsIgnoreCase("alfa") || tipo.equalsIgnoreCase("fim")) {
+                if (!tipo.equalsIgnoreCase("fim")) {
+                    int quantidadePluviometros = leInteiro("Digite o numero de pluviometros transportados:");
+                    adicionarCaminhao(tipo, quantidadePluviometros);
+                } else {
+                    continuar = false;
+                    System.out.println("Finalizando ...");
+                    obterCaminhaoApto();
+                }
             } else {
-                continuar = false;
-                System.out.println("Finalizando ...");
-                obterCaminhaoApto();
+                System.out.println("Erro: Só é permitido caminhões do tipo ALFA ou BETA");
             }
         }
     }
@@ -31,7 +35,8 @@ public class SelecaoCaminhao extends Controle{
 
     private void obterCaminhaoApto(){
         double maior = 0;
-        Caminhao caminhaoApto = new Caminhao("indisponivel", new ArrayList<Pluviometro>(0));
+        double total = 0;
+        Caminhao caminhaoApto = new Caminhao("", new ArrayList<Pluviometro>(0));
         for (Caminhao caminhao : caminhoes) {
             if (caminhao.capacidade() > maior){
                 maior = caminhao.capacidade();
@@ -41,11 +46,13 @@ public class SelecaoCaminhao extends Controle{
         System.out.println("--------------------------------------------------------------------- \n" +
                             "DETALHES SOBRE O CAMINHÃO MAIS APTO A DISTRIBUIÇÃO DE PLUVIÔMETROS \n" +
                             "---------------------------------------------------------------------\n" +
-                            "TIPO: " + caminhaoApto.getTipo() + "\n" +
+                            "TIPO: " + caminhaoApto.getTipo().toLowerCase() + "\n" +
                             "PLUVIOMETROS: ");
         for (Pluviometro pluviometro : caminhaoApto.getPluviometros()){
             System.out.println(pluviometro.getQuantidade());
+            total+=pluviometro.getQuantidade();
         }
+        System.out.println("Total: " + total);
     }
 
 }
