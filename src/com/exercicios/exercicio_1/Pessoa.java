@@ -1,13 +1,16 @@
 package com.exercicios.exercicio_1;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class Pessoa {
     private String nome;
-    private String dataNascimento;
+    private LocalDate dataNascimento;
     private double altura;
 
-    public Pessoa(String nome, String dataNascimento, double altura){
+    public Pessoa(String nome, LocalDate dataNascimento, double altura){
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.altura = altura;
@@ -21,17 +24,8 @@ public class Pessoa {
     }
 
     public int getIdade(){
-        String dataNascimentoArray[] = this.dataNascimento.split("/");
-        int dataComTraco = this.dataNascimento.indexOf("-");
-
-        if (dataComTraco >= 0){ //verifica se a data veio no padrao ""00-00-0000"
-            dataNascimentoArray = this.dataNascimento.split("-");
-        }
-
-        int anoNascimento = Integer.parseInt(dataNascimentoArray[dataNascimentoArray.length-1]);
-        Calendar data = Calendar.getInstance();
-        int anoAtual = data.get(Calendar.YEAR);
-        return anoAtual - anoNascimento;
+        Period idade = Period.between(this.dataNascimento, LocalDate.now());
+        return idade.getYears();
     }
 
     public String getNome() {
@@ -43,10 +37,12 @@ public class Pessoa {
     }
 
     public String getDataNascimento() {
-        return this.dataNascimento;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String format = this.dataNascimento.format(formatter);
+        return format;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

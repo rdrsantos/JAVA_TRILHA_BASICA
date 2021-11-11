@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 public class SelecaoCaminhao extends Controle{
     private ArrayList<Caminhao> caminhoes = new ArrayList<Caminhao>();
-
     public void selecionarCaminhaoApto(){
         boolean continuar = true;
         while (continuar){
             String tipo = leString("Digite o tipo do caminhão:");
-            if(tipo.equalsIgnoreCase("beta") || tipo.equalsIgnoreCase("alfa") || tipo.equalsIgnoreCase("fim")) {
+            if(     tipo.equalsIgnoreCase("beta") ||
+                    tipo.equalsIgnoreCase("alfa") ||
+                    tipo.equalsIgnoreCase("fim")
+            ) {
                 if (!tipo.equalsIgnoreCase("fim")) {
                     int quantidadePluviometros = leInteiro("Digite o numero de pluviometros transportados:");
                     adicionarCaminhao(tipo, quantidadePluviometros);
@@ -22,6 +24,7 @@ public class SelecaoCaminhao extends Controle{
                 System.out.println("Erro: Só é permitido caminhões do tipo ALFA ou BETA");
             }
         }
+
     }
 
     private void adicionarCaminhao(String tipo, int quantidadePluviometros){

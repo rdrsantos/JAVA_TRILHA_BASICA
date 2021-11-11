@@ -1,10 +1,12 @@
 package com.exercicios.exercicio_1;
 
+import java.time.LocalDate;
+
 public class Main {
 
     public static void main(String[] args) {
-        Pessoa rodrigo = new Pessoa("Rodrigo", "21/02/2000", 1.7); // data com separada por /
-        Pessoa maria = new Pessoa("Maria", "12-07-1998", 1.6); // data separada por -
+        Pessoa rodrigo = new Pessoa("Rodrigo", LocalDate.of(2000, 02, 21), 1.7);
+        Pessoa maria = new Pessoa("Maria", LocalDate.of(1999, 02, 21), 1.6);
 
         System.out.println(rodrigo.apresentar());
         System.out.println();

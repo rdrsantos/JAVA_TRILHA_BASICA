@@ -1,6 +1,6 @@
 package com.exercicios.exercicio_4;
 
-public class ControleRemoto{
+public class ControleRemoto implements ControleRemoto{
     private Televisao tv;
 
     public ControleRemoto(Televisao tv){
