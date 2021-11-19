@@ -1,6 +1,7 @@
 package com.exercicios.exercicio_5;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SelecaoCaminhao extends Controle{
     private ArrayList<Caminhao> caminhoes = new ArrayList<Caminhao>();
@@ -24,7 +25,6 @@ public class SelecaoCaminhao extends Controle{
                 System.out.println("Erro: Só é permitido caminhões do tipo ALFA ou BETA");
             }
         }
-
     }
 
     private void adicionarCaminhao(String tipo, int quantidadePluviometros){
@@ -38,24 +38,19 @@ public class SelecaoCaminhao extends Controle{
 
     private void obterCaminhaoApto(){
         double maior = 0;
-        double total = 0;
-        Caminhao caminhaoApto = new Caminhao("", new ArrayList<Pluviometro>(0));
-        for (Caminhao caminhao : caminhoes) {
-            if (caminhao.capacidade() > maior){
-                maior = caminhao.capacidade();
-                caminhaoApto = caminhao;
+        AtomicReference<Caminhao> caminhaoApto = new AtomicReference<>(new Caminhao());
+        caminhoes.forEach((c) -> {
+            if (c.capacidade() > maior) {
+                caminhaoApto.set(c);
             }
-        }
+        });
         System.out.println("--------------------------------------------------------------------- \n" +
                             "DETALHES SOBRE O CAMINHÃO MAIS APTO A DISTRIBUIÇÃO DE PLUVIÔMETROS \n" +
                             "---------------------------------------------------------------------\n" +
-                            "TIPO: " + caminhaoApto.getTipo().toLowerCase() + "\n" +
+                            "TIPO: " + caminhaoApto.get().getTipo().toLowerCase() + "\n" +
                             "PLUVIOMETROS: ");
-        for (Pluviometro pluviometro : caminhaoApto.getPluviometros()){
-            System.out.println(pluviometro.getQuantidade());
-            total+=pluviometro.getQuantidade();
-        }
-        System.out.println("Total: " + total);
+        caminhaoApto.get().getPluviometros().forEach(System.out::println);
+        System.out.println("Total: " + caminhaoApto.get().capacidade());
     }
 
 }

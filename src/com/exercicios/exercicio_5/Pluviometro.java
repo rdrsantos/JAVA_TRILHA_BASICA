@@ -14,4 +14,9 @@ public class Pluviometro {
     public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
+
+    @Override
+    public String toString() {
+        return ""+this.getQuantidade();
+    }
 }

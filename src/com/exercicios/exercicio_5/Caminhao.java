@@ -6,6 +6,10 @@ public class Caminhao {
     private String tipo;
     private ArrayList<Pluviometro> pluviometros = new ArrayList<Pluviometro>();
 
+    public Caminhao(){
+        this.tipo = "";
+        this.pluviometros = pluviometros;
+    }
     public Caminhao(String tipo, ArrayList<Pluviometro> pluviometros){
         this.tipo = tipo;
         this.pluviometros = pluviometros;
@@ -28,10 +32,6 @@ public class Caminhao {
     }
 
     public double capacidade(){
-        double soma = 0;
-        for(Pluviometro pluviometro : this.pluviometros){
-            soma += pluviometro.getQuantidade();
-        }
-        return soma;
+        return this.pluviometros.stream().mapToDouble(Pluviometro::getQuantidade).sum();
     }
 }
